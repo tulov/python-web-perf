@@ -1,6 +1,5 @@
 import json
 from aiohttp import web
-import aiopg
 
 from async_db import get_row
 
