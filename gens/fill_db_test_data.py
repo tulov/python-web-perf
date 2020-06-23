@@ -8,7 +8,7 @@ import string
 rng = random.Random(0)
 
 
-dsn = 'dbname=test user=postgres password=postgres host=127.0.0.1'
+dsn = 'dbname=test user=test password=test host=127.0.0.1'
 
 
 async def go():
