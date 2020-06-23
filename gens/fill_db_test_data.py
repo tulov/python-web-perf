@@ -20,6 +20,11 @@ async def go():
                     short_random_string = "".join(
                         rng.choice(string.ascii_letters) for _ in range(20))
                     await cur.execute(f"INSERT INTO test VALUES ({i}, '{short_random_string}')")
+    print('Success...')
 
 
-asyncio.run(go())
+loop = asyncio.get_event_loop()
+try:
+    loop.run_until_complete(go())
+finally:
+    loop.close()
