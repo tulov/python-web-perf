@@ -14,10 +14,12 @@ dsn = 'dbname=test user=test password=test host=127.0.0.1'
 async def go():
     async with aiopg.create_pool(dsn) as pool:
         async with pool.acquire() as conn:
-            for i in range(1_000_000):
-                short_random_string = "".join(
-                    rng.choice(string.ascii_letters) for _ in range(20))
-                await conn.execute(f"INSERT INTO test VALUES ({i}, '{short_random_string}')")
+            async with conn.cursor() as cur:
+                await cur.execute('DELETE FROM test')
+                for i in range(1_000_000):
+                    short_random_string = "".join(
+                        rng.choice(string.ascii_letters) for _ in range(20))
+                    await cur.execute(f"INSERT INTO test VALUES ({i}, '{short_random_string}')")
 
 
 asyncio.run(go())
