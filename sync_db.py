@@ -8,7 +8,7 @@ def get_pool():
     global pool
     if pool is None:
         pool = psycopg2.pool.SimpleConnectionPool(
-            1, 4, database="test", user="test", password="test",
+            1, 4, database="test", user="test", password="test", host='127.0.0.1'
         )
     return pool
 
